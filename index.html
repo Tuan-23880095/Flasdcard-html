@@ -6,6 +6,8 @@
     <title>Học Flashcard Thông Minh</title>
     <!-- Nhúng Tailwind CSS để giao diện đẹp và tương thích mọi thiết bị -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Nhúng PapaParse để tự động phân tích dữ liệu CSV nội bộ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <!-- Nhúng FontAwesome cho các biểu tượng -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -124,32 +126,38 @@
 
     <script>
         // =========================================================
-        // === BẠN HÃY THAY ĐỔI NỘI DUNG CÁC THẺ FLASHCARD Ở ĐÂY ===
+        // === BẠN HÃY DÁN NỘI DUNG FILE CSV VÀO GIỮA 2 DẤU ` BÊN DƯỚI ===
         // =========================================================
-        let defaultFlashcards = [
-            { 
-                front: "API là gì?", 
-                back: "Giao diện lập trình ứng dụng (Application Programming Interface), giúp các phần mềm giao tiếp với nhau." 
-            },
-            { 
-                front: "AI (Trí tuệ nhân tạo) có nghĩa là gì?", 
-                back: "Ngành khoa học máy tính mô phỏng trí tuệ con người để thực hiện các công việc như tư duy, học tập, giải quyết vấn đề." 
-            },
-            { 
-                front: "Machine Learning (Học máy) là gì?", 
-                back: "Một nhánh của AI cho phép hệ thống tự động học hỏi và cải thiện từ dữ liệu mà không cần lập trình rõ ràng." 
-            },
-            { 
-                front: "HTML dùng để làm gì?", 
-                back: "Tạo cấu trúc cơ bản cho một trang web (như văn bản, hình ảnh, liên kết)." 
-            },
-            { 
-                front: "NotebookLM là gì?", 
-                back: "Một trợ lý nghiên cứu AI của Google, giúp tổng hợp, ghi chú và tạo flashcard từ tài liệu nguồn của người dùng." 
+        const rawCSVData = `Loại nấm nào sau đây có cấu trúc hình mũ điển hình?,Nấm rơm
+"Trong thực tiễn, nấm men thường được sử dụng để làm gì?","Lên men, làm bánh"
+Nấm có vai trò tiêu cực nào đối với thực phẩm?,Làm hư hỏng thực phẩm
+Việc bảo vệ đa dạng sinh học giúp ích gì cho đất và nguồn nước?,"Giúp điều hòa khí hậu và bảo vệ đất, nguồn nước."
+"Khi một lực tác dụng lên vật, nó có thể gây ra hai kết quả chính là gì?",Làm biến đổi chuyển động hoặc làm vật bị biến dạng.
+Hành động đẩy một chiếc xích đu là ví dụ của loại lực nào?,Lực đẩy
+Lực nào sau đây giữ cho Mặt Trăng quay quanh Trái Đất?,Lực hấp dẫn
+Trọng lượng của một vật được định nghĩa là gì?,Độ lớn lực hút của Trái Đất tác dụng lên vật đó.
+Hiện tượng quả táo rơi từ trên cây xuống đất là minh chứng cho lực nào?,Lực hấp dẫn của Trái Đất
+Lực tiếp xúc xuất hiện trong điều kiện nào?,Khi vật gây ra lực có sự tiếp xúc với vật chịu tác dụng của lực.
+Năng lượng có vai trò quan trọng nhất như thế nào đối với máy móc?,Giúp máy móc hoạt động.
+Một chiếc máy bay đang bay trên cao sở hữu những dạng năng lượng chính nào?,Động năng và thế năng hấp dẫn.
+"Khi đun nước bằng ấm điện, năng lượng chuyển hóa từ dạng nào sang dạng nào?",Điện năng chuyển hóa thành nhiệt năng.
+Khoa học tự nhiên là ngành khoa học nghiên cứu về vấn đề gì?,"Các sự vật, hiện tượng, quy luật tự nhiên và những ảnh hưởng của chúng đến cuộc sống."
+Lĩnh vực vật lý học nghiên cứu về đối tượng nào?,"Vật chất, quy luật vận động, lực, năng lượng và sự biến đổi năng lượng."
+Sự khác biệt cơ bản giữa vật sống và vật không sống là gì?,"Vật sống có khả năng trao đổi chất, lớn lên, vận động, cảm ứng và sinh sản."
+"Ký hiệu cảnh báo hình tam giác có viền đen, nền vàng và hình ngọn lửa chỉ điều gì?",Chất dễ cháy
+Dụng cụ nào được dùng để đo lực trong phòng thực hành?,Lực kế`;
+
+        // Tự động phân tích chuỗi CSV trên thành mảng flashcard
+        let defaultFlashcards = [];
+        Papa.parse(rawCSVData.trim(), {
+            complete: function(results) {
+                // Lọc những dòng có đủ 2 cột (front và back)
+                defaultFlashcards = results.data.filter(row => row.length >= 2).map(row => ({
+                    front: row[0].trim(),
+                    back: row[1].trim()
+                }));
             }
-            // Mẫu thêm thẻ mới (nhớ thêm dấu phẩy ở thẻ phía trên):
-            // ,{ front: "Câu hỏi của bạn", back: "Câu trả lời của bạn" }
-        ];
+        });
         // =========================================================
 
         // --- TRẠNG THÁI ỨNG DỤNG ---
@@ -292,9 +300,54 @@
         btnFinish.addEventListener('click', () => {
             if(timerInterval) clearInterval(timerInterval); // Dừng đồng hồ
             
-            // Hiển thị tổng kết cho học sinh copy gửi giáo viên
             const timeSpent = timerDisplay ? timerDisplay.textContent : "00:00";
-            alert(`🎉 KẾT QUẢ HỌC TẬP:\n\n⏱️ Thời gian học: ${timeSpent}\n🔄 Tổng số lần lật thẻ: ${totalFlips} lần\n\nBạn hãy chụp màn hình này gửi cho giáo viên để báo cáo kết quả nhé!`);
+            
+            // Yêu cầu học sinh nhập tên
+            const studentName = prompt("🎉 BẠN ĐÃ HOÀN THÀNH!\n\nVui lòng nhập Họ và Tên của bạn để nộp kết quả cho giáo viên:");
+            
+            if (!studentName) {
+                alert("Bạn chưa nhập tên. Kết quả chưa được gửi!");
+                // Cho phép đồng hồ chạy lại nếu học sinh bấm huỷ
+                timerInterval = setInterval(updateTimer, 1000);
+                return;
+            }
+
+            // Đổi trạng thái nút để báo đang gửi
+            const originalBtnHtml = btnFinish.innerHTML;
+            btnFinish.disabled = true;
+            btnFinish.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Đang gửi dữ liệu...';
+            btnFinish.classList.add('opacity-50', 'cursor-not-allowed');
+
+            // Gửi dữ liệu qua Google Apps Script
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec';
+            
+            // Dùng URLSearchParams để định dạng dữ liệu gửi đi (chuẩn form data)
+            const formData = new URLSearchParams();
+            formData.append('sheetName', 'Flashcard');
+            formData.append('name', studentName);
+            formData.append('time', timeSpent);
+            formData.append('flips', totalFlips);
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors', // Quan trọng: Tránh lỗi CORS trình duyệt khi gọi Google Script
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            })
+            .then(() => {
+                alert(`✅ ĐÃ GỬI KẾT QUẢ THÀNH CÔNG!\n\n- Học sinh: ${studentName}\n- Thời gian học: ${timeSpent}\n- Số lần lật thẻ: ${totalFlips} lần`);
+            })
+            .catch(error => {
+                alert('❌ Lỗi khi gửi kết quả. Vui lòng kiểm tra lại mạng hoặc báo cho giáo viên.');
+                console.error('Error!', error.message);
+            })
+            .finally(() => {
+                btnFinish.disabled = false;
+                btnFinish.innerHTML = originalBtnHtml;
+                btnFinish.classList.remove('opacity-50', 'cursor-not-allowed');
+            });
         });
 
         // --- HỖ TRỢ PHÍM TẮT BÀN PHÍM ---
