@@ -321,20 +321,22 @@ Dụng cụ nào được dùng để đo lực trong phòng thực hành?,Lực
             // Gửi dữ liệu qua Google Apps Script
             const scriptURL = 'https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec';
             
-            // Dùng URLSearchParams để định dạng dữ liệu gửi đi (chuẩn form data)
-            const formData = new URLSearchParams();
-            formData.append('sheetName', 'Flashcard');
-            formData.append('name', studentName);
-            formData.append('time', timeSpent);
-            formData.append('flips', totalFlips);
+            // Đóng gói dữ liệu dạng JSON khớp với cấu trúc định tuyến action của GAS
+            const payloadData = {
+                action: 'save_flashcard',
+                sheetName: 'Flashcard',
+                name: studentName,
+                time: timeSpent,
+                flips: totalFlips
+            };
 
             fetch(scriptURL, {
                 method: 'POST',
-                mode: 'no-cors', // Quan trọng: Tránh lỗi CORS trình duyệt khi gọi Google Script
+                mode: 'no-cors', // Tránh lỗi CORS từ Google Script
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'text/plain;charset=utf-8' // Dùng text/plain để vượt qua CORS preflight
                 },
-                body: formData.toString()
+                body: JSON.stringify(payloadData) // Gửi đi như một chuỗi JSON
             })
             .then(() => {
                 alert(`✅ ĐÃ GỬI KẾT QUẢ THÀNH CÔNG!\n\n- Học sinh: ${studentName}\n- Thời gian học: ${timeSpent}\n- Số lần lật thẻ: ${totalFlips} lần`);
