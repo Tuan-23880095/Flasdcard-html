@@ -6,8 +6,6 @@
     <title>Học Flashcard Thông Minh</title>
     <!-- Nhúng Tailwind CSS để giao diện đẹp và tương thích mọi thiết bị -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Nhúng PapaParse để đọc file CSV chuẩn xác nhất -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <!-- Nhúng FontAwesome cho các biểu tượng -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -63,29 +61,14 @@
             <p class="text-slate-500">Học tập hiệu quả từ dữ liệu NotebookLM</p>
         </div>
 
-        <!-- Khu vực Tải lên CSV -->
-        <div id="upload-section" class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 text-center mb-8">
-            <div class="mb-4 text-blue-500 text-5xl">
-                <i class="fa-solid fa-file-csv"></i>
-            </div>
-            <h2 class="text-xl font-semibold mb-2">Tải lên file CSV của bạn</h2>
-            <p class="text-slate-500 mb-6 text-sm">File cần có ít nhất 2 cột: Cột 1 (Câu hỏi/Từ vựng) - Cột 2 (Câu trả lời/Định nghĩa)</p>
-            
-            <input type="file" id="csv-file" accept=".csv" class="hidden">
-            <label for="csv-file" class="cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition duration-200 inline-block shadow-md">
-                <i class="fa-solid fa-upload mr-2"></i> Chọn File CSV
-            </label>
-            <p id="file-error" class="text-red-500 mt-4 text-sm hidden"></p>
-        </div>
-
-        <!-- Khu vực hiển thị Flashcard (Mặc định ẩn) -->
-        <div id="flashcard-section" class="hidden flex flex-col items-center w-full">
+        <!-- Khu vực hiển thị Flashcard (Luôn hiển thị vì đã tích hợp dữ liệu) -->
+        <div id="flashcard-section" class="flex flex-col items-center w-full">
             
             <!-- Thông tin tiến độ -->
             <div class="w-full flex flex-col sm:flex-row justify-between items-center mb-4 px-2 gap-3">
                 <span id="card-counter" class="text-slate-500 font-medium">Thẻ 1 / 10</span>
                 
-                <!-- Khu vực thống kê mới -->
+                <!-- Khu vực thống kê -->
                 <div class="flex gap-4 text-sm font-medium text-slate-600 bg-white px-4 py-2 rounded-lg shadow-sm border border-slate-200">
                     <div><i class="fa-regular fa-clock text-blue-500 mr-1"></i> <span id="timer-display">00:00</span></div>
                     <div><i class="fa-solid fa-rotate text-green-500 mr-1"></i> <span id="flip-count-display">0</span> lần</div>
@@ -130,29 +113,56 @@
                 Mẹo: Dùng phím <kbd class="bg-slate-100 border border-slate-300 px-1 rounded">←</kbd> <kbd class="bg-slate-100 border border-slate-300 px-1 rounded">→</kbd> để chuyển thẻ, <kbd class="bg-slate-100 border border-slate-300 px-2 rounded">Space</kbd> để lật.
             </div>
 
-            <button id="btn-upload-new" class="mt-8 text-sm text-blue-500 hover:underline">
-                <i class="fa-solid fa-folder-open mr-1"></i> Tải lên danh sách khác
+            <button id="btn-restart" class="mt-8 text-sm text-blue-500 hover:underline">
+                <i class="fa-solid fa-rotate-left mr-1"></i> Học lại từ đầu
+            </button>
+            <button id="btn-finish" class="mt-4 text-sm font-semibold text-green-600 hover:underline">
+                <i class="fa-solid fa-flag-checkered mr-1"></i> Kết thúc & Xem điểm
             </button>
         </div>
     </div>
 
     <script>
+        // =========================================================
+        // === BẠN HÃY THAY ĐỔI NỘI DUNG CÁC THẺ FLASHCARD Ở ĐÂY ===
+        // =========================================================
+        let defaultFlashcards = [
+            { 
+                front: "API là gì?", 
+                back: "Giao diện lập trình ứng dụng (Application Programming Interface), giúp các phần mềm giao tiếp với nhau." 
+            },
+            { 
+                front: "AI (Trí tuệ nhân tạo) có nghĩa là gì?", 
+                back: "Ngành khoa học máy tính mô phỏng trí tuệ con người để thực hiện các công việc như tư duy, học tập, giải quyết vấn đề." 
+            },
+            { 
+                front: "Machine Learning (Học máy) là gì?", 
+                back: "Một nhánh của AI cho phép hệ thống tự động học hỏi và cải thiện từ dữ liệu mà không cần lập trình rõ ràng." 
+            },
+            { 
+                front: "HTML dùng để làm gì?", 
+                back: "Tạo cấu trúc cơ bản cho một trang web (như văn bản, hình ảnh, liên kết)." 
+            },
+            { 
+                front: "NotebookLM là gì?", 
+                back: "Một trợ lý nghiên cứu AI của Google, giúp tổng hợp, ghi chú và tạo flashcard từ tài liệu nguồn của người dùng." 
+            }
+            // Mẫu thêm thẻ mới (nhớ thêm dấu phẩy ở thẻ phía trên):
+            // ,{ front: "Câu hỏi của bạn", back: "Câu trả lời của bạn" }
+        ];
+        // =========================================================
+
         // --- TRẠNG THÁI ỨNG DỤNG ---
-        let flashcards = []; // Mảng chứa dữ liệu thẻ
+        let flashcards = [...defaultFlashcards]; // Copy mảng mặc định để sử dụng
         let currentIndex = 0; // Vị trí thẻ hiện tại
         let isFlipped = false; // Trạng thái lật của thẻ
 
-        // BIẾN THỐNG KÊ MỚI
+        // BIẾN THỐNG KÊ
         let totalFlips = 0;
         let sessionStartTime = null;
         let timerInterval = null;
 
         // --- CÁC PHẦN TỬ GIAO DIỆN ---
-        const fileInput = document.getElementById('csv-file');
-        const uploadSection = document.getElementById('upload-section');
-        const flashcardSection = document.getElementById('flashcard-section');
-        const fileError = document.getElementById('file-error');
-        
         const flashcardEl = document.getElementById('flashcard');
         const frontContent = document.getElementById('card-front-content');
         const backContent = document.getElementById('card-back-content');
@@ -165,59 +175,14 @@
         const btnNext = document.getElementById('btn-next');
         const btnFlip = document.getElementById('btn-flip');
         const btnShuffle = document.getElementById('btn-shuffle');
-        const btnUploadNew = document.getElementById('btn-upload-new');
-
-        // --- XỬ LÝ ĐỌC FILE CSV ---
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            // Kiểm tra đuôi file
-            if (!file.name.endsWith('.csv')) {
-                showError("Vui lòng chọn đúng file định dạng .csv");
-                return;
-            }
-
-            // Dùng PapaParse để phân tích file CSV
-            Papa.parse(file, {
-                complete: function(results) {
-                    // Lọc ra các dòng hợp lệ (có ít nhất 2 cột và không bị rỗng hoàn toàn)
-                    const validData = results.data.filter(row => row.length >= 2 && (row[0].trim() !== '' || row[1].trim() !== ''));
-                    
-                    if (validData.length === 0) {
-                        showError("File CSV trống hoặc không đúng định dạng (cần ít nhất 2 cột).");
-                        return;
-                    }
-
-                    // Thường dòng đầu tiên là Header (như "Question", "Answer"). 
-                    // Ta kiểm tra nếu giống tiêu đề thì bỏ qua dòng 1.
-                    let startIndex = 0;
-                    const firstRowStr = validData[0].join("").toLowerCase();
-                    if (firstRowStr.includes("front") || firstRowStr.includes("back") || firstRowStr.includes("câu hỏi") || firstRowStr.includes("term") || firstRowStr.includes("definition")) {
-                        if(validData.length > 1) startIndex = 1; 
-                    }
-
-                    flashcards = validData.slice(startIndex).map(row => ({
-                        front: row[0].trim(),
-                        back: row[1].trim()
-                    }));
-
-                    startFlashcards();
-                },
-                error: function(err) {
-                    showError("Lỗi khi đọc file: " + err.message);
-                }
-            });
-        });
+        const btnRestart = document.getElementById('btn-restart');
+        const btnFinish = document.getElementById('btn-finish');
 
         // --- CÁC HÀM LOGIC & HIỂN THỊ ---
 
-        function showError(msg) {
-            fileError.textContent = msg;
-            fileError.classList.remove('hidden');
-        }
-
         function startFlashcards() {
+            if (flashcards.length === 0) return;
+            
             currentIndex = 0;
             isFlipped = false;
             
@@ -228,9 +193,6 @@
             if(timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(updateTimer, 1000);
 
-            uploadSection.classList.add('hidden');
-            flashcardSection.classList.remove('hidden');
-            fileError.classList.add('hidden');
             updateCardDisplay();
         }
 
@@ -320,23 +282,23 @@
             }
         });
 
-        btnUploadNew.addEventListener('click', () => {
+        btnRestart.addEventListener('click', () => {
+            if (confirm("Bạn có chắc muốn bắt đầu lại từ đầu? Đồng hồ sẽ được làm mới.")) {
+                flashcards = [...defaultFlashcards]; // Reset lại mảng về thứ tự ban đầu
+                startFlashcards();
+            }
+        });
+
+        btnFinish.addEventListener('click', () => {
             if(timerInterval) clearInterval(timerInterval); // Dừng đồng hồ
             
             // Hiển thị tổng kết cho học sinh copy gửi giáo viên
             const timeSpent = timerDisplay ? timerDisplay.textContent : "00:00";
-            alert(`🎉 KẾT QUẢ HỌC TẬP:\n\n⏱️ Thời gian học: ${timeSpent}\n🔄 Tổng số lần lật thẻ: ${totalFlips} lần\n\nHãy chụp màn hình này gửi cho giáo viên nhé!`);
-
-            flashcardSection.classList.add('hidden');
-            uploadSection.classList.remove('hidden');
-            fileInput.value = ''; // Reset file input
+            alert(`🎉 KẾT QUẢ HỌC TẬP:\n\n⏱️ Thời gian học: ${timeSpent}\n🔄 Tổng số lần lật thẻ: ${totalFlips} lần\n\nBạn hãy chụp màn hình này gửi cho giáo viên để báo cáo kết quả nhé!`);
         });
 
         // --- HỖ TRỢ PHÍM TẮT BÀN PHÍM ---
         document.addEventListener('keydown', (e) => {
-            // Chỉ bắt phím khi phần flashcard đang hiển thị
-            if (flashcardSection.classList.contains('hidden')) return;
-
             if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'ArrowDown') {
                 e.preventDefault(); // Tránh cuộn trang
                 flipCard();
@@ -345,6 +307,11 @@
             } else if (e.code === 'ArrowLeft') {
                 goPrev();
             }
+        });
+
+        // --- KHỞI CHẠY KHI VỪA MỞ TRANG ---
+        document.addEventListener('DOMContentLoaded', () => {
+            startFlashcards();
         });
 
     </script>
