@@ -3,46 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh sách Flashcard</title>
+    <title>Danh sách Flashcard Tự Động</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-50 p-8">
-    <div class="max-w-4xl mx-auto">
-        <header class="text-center mb-12">
-            <h1 class="text-4xl font-bold text-blue-700">Thư Viện Flashcard</h1>
-            <p class="text-slate-500 mt-2">Chọn Khối -> Môn -> Bài học</p>
+<body class="bg-slate-50 p-8 min-h-screen">
+    <div class="max-w-5xl mx-auto">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-blue-700"><i class="fa-solid fa-layer-group mr-2"></i>Thư Viện Flashcard</h1>
+            <p class="text-slate-500 mt-2">Dữ liệu được tự động cập nhật từ thư mục data</p>
         </header>
 
-        <div class="space-y-8">
-            <section>
-                <h2 class="text-xl font-bold border-b-2 border-blue-200 pb-2 mb-4">Khối 6</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="study.html?file=toan6-GK1-01&title=Toán 6 - Giữa Kỳ 1" class="bg-white p-4 rounded-lg shadow hover:shadow-md transition border-l-4 border-blue-500">
-                        <p class="font-bold">Môn Toán</p>
-                        <p class="text-sm text-slate-500">Đề kiểm tra chất lượng 8 tuần - Đề 01</p>
-                    </a>
-                    <a href="study.html?file=toan6-CK1-01&title=Toán 6 - Cuối Kỳ 1" class="bg-white p-4 rounded-lg shadow hover:shadow-md transition border-l-4 border-blue-500">
-                        <p class="font-bold">Môn Toán</p>
-                        <p class="text-sm text-slate-500">Ôn tập học kỳ 1</p>
-                    </a>
-                    <a href="study.html?file=khtn6-01&title=Khoa học tự nhiên 6" class="bg-white p-4 rounded-lg shadow hover:shadow-md transition border-l-4 border-green-500">
-                        <p class="font-bold">Môn KHTN</p>
-                        <p class="text-sm text-slate-500">Flashcard kiến thức chung</p>
-                    </a>
-                </div>
-            </section>
-
-            <section>
-                <h2 class="text-xl font-bold border-b-2 border-blue-200 pb-2 mb-4">Khối 7</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="study.html?file=van7-01&title=Ngữ Văn 7" class="bg-white p-4 rounded-lg shadow hover:shadow-md transition border-l-4 border-red-500">
-                        <p class="font-bold">Môn Văn</p>
-                        <p class="text-sm text-slate-500">Tác giả, tác phẩm</p>
-                    </a>
-                </div>
-            </section>
+        <div id="loading-spinner" class="text-center py-10 text-blue-500">
+            <i class="fa-solid fa-spinner fa-spin fa-2x mb-2"></i>
+            <p>Đang quét dữ liệu từ kho chứa...</p>
         </div>
+
+        <div id="filter-buttons" class="flex flex-wrap justify-center gap-2 mb-8 hidden">
+            <button onclick="filterGrade('all')" class="grade-btn active bg-blue-500 text-white px-6 py-2 rounded-full shadow-sm border transition">Tất cả</button>
+            </div>
+
+        <div id="card-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
     </div>
+
+    <script>
+        // =========================================================
+        // CẤU HÌNH GITHUB CỦA BẠN (BẮT BUỘC SỬA)
+        // =========================================================
+        const GITHUB_USERNAME = 'Tuan-23880095'; // Ví dụ: 'dinhquoctuan'
+        const REPO_NAME = 'Flasdcard-html';     // Ví dụ: 'flashcard-app'
+        const FOLDER_PATH = 'data';                  // Thư mục chứa file CSV
+        
+        // URL gọi API của GitHub
+        const API_URL = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER_PATH}`;
+
+        // Biến lưu trữ dữ liệu toàn cục
+        let allLessons = [];
+
+        // Hàm bóc tách thông tin từ tên file
+        // Giả định quy tắc đặt tên: monkhoi-noidung.csv (Ví dụ: toan6-GK1-01.csv)
+        function parseFileName(filename) {
+            const nameWithoutExt = filename.replace('.csv', '');
+            
+            // Dùng Regex để tách phần chữ (môn), phần số (khối), và phần sau dấu gạch ngang (tiêu đề)
+            // match[1] = toan, match[2] = 6, match[3] = GK1-01
+            const match = nameWithoutExt.match(/^([a-zA-Z]+)(\d+)-(.*)$/);
+            
+            if (match) {
+                // Tự động định dạng tên môn cho đẹp
+                const subjectMap = {
+                    'toan': 'Toán', 'van': 'Ngữ Văn', 'anh': 'Tiếng Anh',
+                    'khtn': 'KHTN', 'ly': 'Vật Lý', 'hoa': 'Hóa Học', 'sinh': 'Sinh Học',
+                    'su': 'Lịch Sử', 'dia': 'Địa Lý', 'gdcd': 'GDCD'
+                };
+                const rawSubject = match[1].toLowerCase();
+                const formattedSubject = subjectMap[rawSubject] || rawSubject.toUpperCase();
+
+                return {
+                    id: nameWithoutExt,
+                    grade: match[2],
+                    subject: formattedSubject,
+                    title: match[3].replace(/-/g, ' ') // Biến GK1-01 thành GK1 01
+                };
+            }
+            
+            // Nếu tên file không theo chuẩn trên
+            return {
+                id: nameWithoutExt,
+                grade: 'Khác',
+                subject: 'Chung',
+                title: nameWithoutExt
+            };
+        }
+
+        // Lấy dữ liệu từ GitHub
+        async function fetchFolders() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Không thể kết nối đến GitHub API');
+                
+                const files = await response.json();
+                
+                // Lọc chỉ lấy file .csv và chuyển đổi thành mảng object bài học
+                allLessons = files
+                    .filter(file => file.name.endsWith('.csv'))
+                    .map(file => parseFileName(file.name));
+
+                // Ẩn spinner
+                document.getElementById('loading-spinner').classList.add('hidden');
+                document.getElementById('filter-buttons').classList.remove('hidden');
+
+                // Sinh các nút lọc theo khối lớp hiện có
+                createFilterButtons();
+
+                // Hiển thị tất cả thẻ ban đầu
+                renderCards(allLessons);
+
+            } catch (error) {
+                console.error(error);
+                document.getElementById('loading-spinner').innerHTML = `
+                    <div class="text-red-500">
+                        <i class="fa-solid fa-triangle-exclamation fa-2x mb-2"></i>
+                        <p>Lỗi kết nối hoặc không tìm thấy thư mục dữ liệu trên GitHub.</p>
+                        <p class="text-sm text-slate-500 mt-2">Vui lòng kiểm tra lại GITHUB_USERNAME và REPO_NAME trong code.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Tạo nút bấm lọc Khối lớp linh hoạt dựa trên dữ liệu tải về
+        function createFilterButtons() {
+            // Lấy danh sách các khối lớp duy nhất (không trùng lặp)
+            const grades = [...new Set(allLessons.map(lesson => lesson.grade))].sort((a,b) => a - b);
+            
+            const btnContainer = document.getElementById('filter-buttons');
+            grades.forEach(grade => {
+                if (grade === 'Khác') return; // Xử lý 'Khác' sau nếu cần
+                const btn = document.createElement('button');
+                btn.className = 'grade-btn bg-white text-slate-700 px-6 py-2 rounded-full shadow-sm border hover:bg-blue-100 transition';
+                btn.textContent = `Khối ${grade}`;
+                btn.onclick = (e) => filterGrade(grade, e.target);
+                btnContainer.appendChild(btn);
+            });
+        }
+
+        // Lọc hiển thị theo khối
+        function filterGrade(grade, buttonElement = null) {
+            // Reset màu sắc các nút
+            document.querySelectorAll('.grade-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-500', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+
+            // Set màu cho nút được bấm (hoặc nút "Tất cả" mặc định)
+            if (buttonElement) {
+                buttonElement.classList.remove('bg-white', 'text-slate-700');
+                buttonElement.classList.add('bg-blue-500', 'text-white');
+            } else {
+                document.querySelector('.grade-btn').classList.remove('bg-white', 'text-slate-700');
+                document.querySelector('.grade-btn').classList.add('bg-blue-500', 'text-white');
+            }
+
+            // Render lại card
+            if (grade === 'all') {
+                renderCards(allLessons);
+            } else {
+                const filtered = allLessons.filter(lesson => lesson.grade === grade);
+                renderCards(filtered);
+            }
+        }
+
+        // Hiển thị danh sách thẻ
+        function renderCards(lessons) {
+            const container = document.getElementById('card-list');
+            
+            if (lessons.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center text-slate-400 py-8">Không có dữ liệu cho mục này.</div>`;
+                return;
+            }
+
+            container.innerHTML = lessons.map(item => `
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">Lớp ${item.grade}</span>
+                        <span class="text-slate-500 font-medium text-sm bg-slate-100 px-3 py-1 rounded-full">${item.subject}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-800 mb-6 truncate" title="${item.title}">${item.title}</h3>
+                    <a href="study.html?file=${item.id}&title=${encodeURIComponent(item.subject + ' ' + item.grade + ' - ' + item.title)}" 
+                       class="block text-center bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium w-full">
+                        <i class="fa-solid fa-play mr-2"></i>Học ngay
+                    </a>
+                </div>
+            `).join('');
+        }
+
+        // Tự động chạy khi load trang
+        document.addEventListener('DOMContentLoaded', fetchFolders);
+    </script>
 </body>
 </html>
