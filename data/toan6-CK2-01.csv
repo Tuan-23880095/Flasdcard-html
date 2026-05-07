@@ -1,0 +1,100 @@
+Liệt kê tập hợp các số nguyên tố nhỏ hơn 14.,$\{2; 3; 5; 7; 11; 13\}$.
+Thứ tự thực hiện các phép tính đối với biểu thức có dấu ngoặc là gì?,Ngoặc tròn $() \rightarrow$ Ngoặc vuông $[] \rightarrow$ Ngoặc nhọn $\{\}$.
+Số đối của số $2023$ là số nào?,$-2023$.
+Phân tích số $24$ ra thừa số nguyên tố.,$2^3 \cdot 3$.
+Công thức tính diện tích hình thoi khi biết độ dài hai đường chéo $d_1$ và $d_2$ là gì?,$S = \frac{1}{2} d_1 \cdot d_2$.
+"Nếu một người sinh năm $570$ TCN và mất năm $495$ TCN, hãy dùng phép tính số nguyên để tính tuổi của người đó.",$-495 - (-570) = 75$ (tuổi).
+Đặc điểm về cạnh và góc của một hình lục giác đều là gì?,Có 6 cạnh bằng nhau và 6 góc bằng nhau.
+Tập hợp các bội chung nhỏ hơn $100$ của $7$ và $6$ gồm những số nào?,$\{0; 42; 84\}$.
+"Khi so sánh hai số nguyên âm, số có giá trị tuyệt đối lớn hơn thì sẽ _____.",nhỏ hơn
+"Nhiệt độ hiện tại là $-17^\circ C$, nếu giảm thêm $8^\circ C$ thì nhiệt độ mới là bao nhiêu?",$-25^\circ C$.
+"Để chứng minh tổng $1 + 5 + 5^2 + 5^3 + 5^4 + 5^5 + 5^6 + 5^7 + 5^8$ chia hết cho $31$, ta nên nhóm các hạng tử như thế nào?",Nhóm mỗi cụm 3 hạng tử liên tiếp: $(1 + 5 + 5^2) + 5^3(1 + 5 + 5^2) + 5^6(1 + 5 + 5^2)$.
+"Trong thống kê, dữ liệu về ""Phương tiện đến trường của học sinh"" thuộc loại dữ liệu nào?",Dữ liệu không phải là số (dữ liệu định tính).
+Công thức tính diện tích hình bình hành với cạnh đáy $a$ và chiều cao tương ứng $h$ là gì?,$S = a \cdot h$.
+Số tự nhiên $n > 1$ không phải là số nguyên tố thì được gọi là _____.,hợp số
+Một số chia hết cho $9$ khi nào?,Khi tổng các chữ số của số đó chia hết cho $9$.
+Tìm $UCLN(12; 36)$.,$12$ (vì $36$ chia hết cho $12$).
+Tích của hai số nguyên khác dấu luôn là một số nguyên _____.,âm
+Hình thang cân có đặc điểm gì về hai đường chéo?,Hai đường chéo bằng nhau.
+"Trong biểu đồ cột kép, mục đích chính của việc sử dụng hai cột cạnh nhau là gì?",Để so sánh hai đối tượng trong cùng một tiêu chí.
+Phép tính $2^{2024} : 2^{2021}$ có kết quả là bao nhiêu?,$2^3 = 8$.
+Số tự nhiên nhỏ nhất là số nào?,Số $0$
+Tập hợp các số tự nhiên khác $0$ được ký hiệu là gì?,$N^*$
+Số nguyên tố là số tự nhiên lớn hơn $1$ và chỉ có bao nhiêu ước?,Có đúng $2$ ước là $1$ và chính nó.
+Hợp số là số tự nhiên lớn hơn $1$ và có đặc điểm gì về số lượng ước?,Có nhiều hơn $2$ ước.
+Số $0$ và số $1$ có được coi là số nguyên tố hay hợp số không?,"Không, số $0$ và số $1$ không là số nguyên tố cũng không là hợp số."
+Số nguyên tố chẵn duy nhất là số nào?,Số $2$
+Liệt kê các số nguyên tố nhỏ hơn $10$.,$2; 3; 5; 7$
+Kết quả của phép tính $a^m \cdot a^n$ dưới dạng lũy thừa là gì?,$a^{m+n}$
+"Kết quả của phép tính $a^m : a^n$ (với $a \ne 0, m \ge n$) dưới dạng lũy thừa là gì?",$a^{m-n}$
+Quy ước giá trị của $a^0$ (với $a \ne 0$) là bao nhiêu?,$1$
+Thứ tự thực hiện các phép tính trong một biểu thức không có dấu ngoặc là gì?,Lũy thừa $\rightarrow$ Nhân và chia $\rightarrow$ Cộng và trừ.
+Thứ tự thực hiện các phép tính trong một biểu thức có dấu ngoặc là gì?,Ngoặc tròn $() \rightarrow$ Ngoặc vuông $[] \rightarrow$ Ngoặc nhọn $\{\}$.
+Một số chia hết cho $2$ khi chữ số tận cùng của nó là các số nào?,$0; 2; 4; 6; 8$
+Một số chia hết cho $5$ khi chữ số tận cùng của nó là các số nào?,$0$ hoặc $5$
+Điều kiện để một số chia hết cho $3$ là gì?,Tổng các chữ số của số đó chia hết cho $3$.
+Điều kiện để một số chia hết cho $9$ là gì?,Tổng các chữ số của số đó chia hết cho $9$.
+Ước chung lớn nhất (ƯCLN) của hai hay nhiều số là số như thế nào?,Số lớn nhất trong tập hợp các ước chung của các số đó.
+Bội chung nhỏ nhất (BCNN) của hai hay nhiều số là số như thế nào?,Số nhỏ nhất khác $0$ trong tập hợp các bội chung của các số đó.
+Nếu $a$ chia hết cho $b$ thì $b$ được gọi là gì của $a$?,Ước của $a$.
+Nếu $a$ chia hết cho $b$ thì $a$ được gọi là gì của $b$?,Bội của $b$.
+Số đối của số nguyên $a$ được ký hiệu là gì?,$-a$
+Số đối của $-2023$ là bao nhiêu?,$2023$
+Tập hợp các số nguyên $Z$ bao gồm những loại số nào?,"Số nguyên âm, số $0$ và số nguyên dương."
+"Khi so sánh hai số nguyên âm, số nào có giá trị tuyệt đối lớn hơn thì số đó _____.",nhỏ hơn
+Mọi số nguyên âm đều luôn nhỏ hơn số nào?,Số $0$ (hoặc mọi số nguyên dương).
+Quy tắc cộng hai số nguyên cùng dấu âm là gì?,"Cộng hai giá trị tuyệt đối của chúng rồi đặt dấu ""-"" trước kết quả."
+Kết quả của phép tính $(-15) + (-20)$ là bao nhiêu?,$-35$
+Kết quả của tích hai số nguyên khác dấu luôn là một số _____.,nguyên âm
+Kết quả của tích hai số nguyên cùng dấu luôn là một số _____.,nguyên dương
+"Khi bỏ dấu ngoặc có dấu ""-"" đằng trước, ta phải làm gì với các số hạng trong ngoặc?",Đổi dấu tất cả các số hạng trong ngoặc.
+Tam giác đều có bao nhiêu cạnh bằng nhau?,$3$ cạnh bằng nhau.
+Mỗi góc của tam giác đều bằng bao nhiêu độ?,$60^\circ$
+Hình vuông có mấy trục đối xứng?,$4$ trục đối xứng.
+Đặc điểm về hai đường chéo của hình chữ nhật là gì?,Chúng bằng nhau.
+Công thức tính diện tích hình chữ nhật có hai cạnh $a$ và $b$ là gì?,$S = a \cdot b$
+Công thức tính chu vi hình chữ nhật có hai cạnh $a$ và $b$ là gì?,$C = (a + b) \cdot 2$
+"Trong hình thoi, hai đường chéo có mối quan hệ gì về góc?",Chúng vuông góc với nhau.
+Công thức tính diện tích hình thoi khi biết độ dài hai đường chéo $m$ và $n$ là gì?,$S = \frac{1}{2} m \cdot n$
+Hình bình hành có các cặp cạnh đối diện như thế nào?,Song song và bằng nhau.
+Công thức tính diện tích hình bình hành có cạnh đáy $a$ và chiều cao tương ứng $h$ là gì?,$S = a \cdot h$
+Lục giác đều được ghép từ bao nhiêu tam giác đều bằng nhau?,$6$ tam giác đều.
+Hình thang cân có đặc điểm gì về hai cạnh bên?,Hai cạnh bên bằng nhau.
+Hình thang cân có đặc điểm gì về hai đường chéo?,Hai đường chéo bằng nhau.
+Dữ liệu là số được gọi là gì?,Số liệu
+Việc kiểm tra xem dữ liệu có đúng định dạng hoặc có nằm trong phạm vi dự kiến không được gọi là đánh giá tính _____ của dữ liệu.,hợp lý
+"Để biểu diễn sự thay đổi của một đại lượng theo thời gian, người ta thường dùng loại biểu đồ nào?",Biểu đồ đoạn thẳng (hoặc biểu đồ cột).
+"Trong biểu đồ cột kép, hai cột đứng cạnh nhau dùng để làm gì?",So sánh hai tập dữ liệu khác nhau của cùng một đối tượng.
+"Nếu nhiệt độ phòng là $-17^\circ C$, sau khi giảm thêm $8^\circ C$ thì nhiệt độ mới là bao nhiêu?",$-25^\circ C$
+Tính chu vi khu vườn hình chữ nhật có chiều dài $30m$ và chiều rộng $10m$.,$80m$
+Tính diện tích khu vườn hình chữ nhật có chiều dài $30m$ và chiều rộng $10m$.,$300m^2$
+"Nếu xếp hàng $12, 10$ hay $15$ đều vừa đủ thì số học sinh là _____ của $12, 10, 15$.",Bội chung
+Một hình vuông có cạnh $5m$ thì diện tích là bao nhiêu?,$25m^2$
+"Trong bảng thống kê, tổng các số liệu ở cột ""Số lượng"" cho ta biết điều gì?",Tổng số đối tượng được điều tra.
+"Hình nào sau đây không có tâm đối xứng: Hình vuông, hình chữ nhật, tam giác đều?",Tam giác đều
+Hình thoi có bao nhiêu trục đối xứng?,$2$ trục đối xứng (là hai đường chéo).
+Phép tính $15 - ( -5)$ có kết quả là bao nhiêu?,$20$
+"Để tìm số đĩa quà nhiều nhất có thể chia từ $18$ quả xoài và $30$ quả mận, ta cần tìm _____.",ƯCLN của $18$ và $30$.
+"Khi nhân một số nguyên với $0$, kết quả luôn là bao nhiêu?",$0$
+Phép tính $2^3 \cdot 2^2$ bằng bao nhiêu?,$2^5$ (hoặc $32$)
+Một miếng đất hình vuông cạnh $15m$. Tính diện tích miếng đất đó.,$225m^2$
+"Lớp 6A có $4$ bạn điểm $10, 5$ bạn điểm $9, 3$ bạn điểm $8$. Tính tổng số học sinh đạt từ $8$ điểm trở lên.",$12$ học sinh.
+"Trong hình bình hành, các góc đối diện có đặc điểm gì?",Chúng bằng nhau.
+Đơn vị đo diện tích thường dùng trong các bài toán thực tế ở lớp 6 là gì?,"$m^2, cm^2, dm^2$"
+"Một chiếc diều ở độ cao $15m$, giảm $5m$ rồi lại tăng $7m$. Độ cao cuối cùng là bao nhiêu?",$17m$
+Số nguyên âm biểu thị các tình huống thực tế nào?,"Nhiệt độ dưới $0^\circ C$, độ cao dưới mực nước biển, số tiền nợ."
+Ước chung của $12$ và $18$ là những số nào?,$1; 2; 3; 6$
+BCNN của $4$ và $6$ là bao nhiêu?,$12$
+"Trong các số $13, 15, 17, 19$, số nào là hợp số?",Số $15$
+Kết quả của $100 - ( -20)$ là bao nhiêu?,$120$
+Hình chữ nhật có mấy tâm đối xứng?,$1$ tâm đối xứng (là giao điểm hai đường chéo).
+Tập hợp $A = \{x \in N | 5 < x < 8\}$ gồm các phần tử nào?,$\{6; 7\}$
+Số chia hết cho cả $2$ và $5$ phải có chữ số tận cùng là số nào?,Số $0$
+Phân tích số $24$ ra thừa số nguyên tố.,$2^3 \cdot 3$
+"Cách viết tập hợp nào sau đây đúng: $A = [1, 2, 3]$ hay $A = \{1; 2; 3\}$?",$A = \{1; 2; 3\}$
+"Trong phép chia $a$ cho $b$, số dư $r$ phải thỏa mãn điều kiện gì?",$0 \le r < b$
+"Nếu một tổ có $12$ bạn, trong đó có $K$ bạn vắng (với $K$ là ký tự), dữ liệu này có hợp lý không?","Không hợp lý, vì số lượng người phải là số tự nhiên."
+"Công thức tính diện tích hình thang có hai đáy $a, b$ và chiều cao $h$ là gì?",$S = \frac{(a + b) \cdot h}{2}$
+Số $-5$ và $5$ được gọi là hai số _____ nhau.,đối
+Mọi số nguyên dương đều _____ số $0$.,lớn hơn
+"Trong hình lục giác đều, các đường chéo chính có đặc điểm gì?",Chúng bằng nhau và cắt nhau tại một điểm.
