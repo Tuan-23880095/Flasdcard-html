@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học Flashcard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .perspective { perspective: 1000px; }
+        .flip-card-inner { transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; position: relative; width: 100%; height: 100%; }
+        .is-flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { backface-visibility: hidden; position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .flip-card-back { transform: rotateY(180deg); background-color: #f0f9ff; }
+        .card-text { white-space: pre-wrap; word-break: break-word; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col items-center py-10 px-4">
+
+    <div class="max-w-3xl w-full">
+        <div class="text-center mb-8">
+            <a href="index.html" class="text-blue-500 hover:underline mb-2 inline-block"><i class="fa-solid fa-chevron-left"></i> Quay lại danh sách</a>
+            <h1 id="lesson-title" class="text-3xl font-bold text-blue-600 mb-2">Đang tải dữ liệu...</h1>
+        </div>
+
+        <div id="flashcard-section" class="flex flex-col items-center w-full">
+            <div class="w-full flex justify-between items-center mb-4 px-2">
+                <span id="card-counter" class="text-slate-500 font-medium">Thẻ 0 / 0</span>
+                <div class="flex gap-4 text-sm font-medium text-slate-600 bg-white px-4 py-2 rounded-lg shadow-sm border">
+                    <div><i class="fa-regular fa-clock text-blue-500 mr-1"></i> <span id="timer-display">00:00</span></div>
+                    <div><i class="fa-solid fa-rotate text-green-500 mr-1"></i> <span id="flip-count-display">0</span> lần</div>
+                </div>
+                <button id="btn-shuffle" class="text-blue-600 hover:text-blue-800 font-medium"><i class="fa-solid fa-shuffle mr-1"></i> Trộn</button>
+            </div>
+
+            <div id="flashcard" class="perspective w-full h-80 sm:h-96 cursor-pointer mb-8">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front bg-white border-2 border-blue-100">
+                        <span class="absolute top-4 left-4 text-xs font-bold text-blue-400 uppercase">Câu hỏi</span>
+                        <div id="card-front-content" class="text-2xl text-center font-medium card-text"></div>
+                    </div>
+                    <div class="flip-card-back border-2 border-blue-200">
+                        <span class="absolute top-4 left-4 text-xs font-bold text-blue-500 uppercase">Trả lời</span>
+                        <div id="card-back-content" class="text-xl text-center text-slate-700 card-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 w-full">
+                <button id="btn-prev" class="bg-white border p-3 rounded-full shadow-sm disabled:opacity-30"><i class="fa-solid fa-arrow-left"></i></button>
+                <button id="btn-flip" class="bg-blue-600 text-white py-3 px-8 rounded-full shadow-md font-medium">Lật thẻ</button>
+                <button id="btn-next" class="bg-white border p-3 rounded-full shadow-sm disabled:opacity-30"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+            
+            <button id="btn-finish" class="mt-12 bg-green-100 text-green-700 py-2 px-6 rounded-lg font-bold hover:bg-green-200 transition">
+                <i class="fa-solid fa-flag-checkered mr-1"></i> Kết thúc & Nộp bài
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // --- LOGIC TỰ ĐỘNG TẢI DỮ LIỆU TỪ URL ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileId = urlParams.get('file'); // Tên file CSV
+        const titleParam = urlParams.get('title'); // Tiêu đề hiển thị
+        
+        if (titleParam) document.getElementById('lesson-title').textContent = titleParam;
+
+        let flashcards = [];
+        let currentIndex = 0;
+        let isFlipped = false;
+        let totalFlips = 0;
+        let sessionStartTime = null;
+        let timerInterval = null;
+
+        // Các thành phần UI
+        const flashcardEl = document.getElementById('flashcard');
+        const frontContent = document.getElementById('card-front-content');
+        const backContent = document.getElementById('card-back-content');
+        const timerDisplay = document.getElementById('timer-display');
+        const flipCountDisplay = document.getElementById('flip-count-display');
+        const cardCounter = document.getElementById('card-counter');
+
+        // Hàm tải dữ liệu CSV từ bên ngoài
+        async function loadLessonData() {
+            if (!fileId) {
+                alert("Không có thông tin bài học!");
+                return;
+            }
+            try {
+                const response = await fetch(`data/${fileId}.csv`);
+                const csvData = await response.text();
+                
+                Papa.parse(csvData.trim(), {
+                    complete: function(results) {
+                        flashcards = results.data.filter(row => row.length >= 2).map(row => ({
+                            front: row[0].trim(),
+                            back: row[1].trim()
+                        }));
+                        startFlashcards();
+                    }
+                });
+            } catch (e) {
+                alert("Lỗi khi tải file dữ liệu!");
+            }
+        }
+
+        function startFlashcards() {
+            if (flashcards.length === 0) return;
+            currentIndex = 0;
+            isFlipped = false;
+            totalFlips = 0;
+            sessionStartTime = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+            updateCardDisplay();
+        }
+
+        function updateTimer() {
+            const diff = Math.floor((new Date() - sessionStartTime) / 1000);
+            const m = Math.floor(diff / 60).toString().padStart(2, '0');
+            const s = (diff % 60).toString().padStart(2, '0');
+            timerDisplay.textContent = `${m}:${s}`;
+        }
+
+        function updateCardDisplay() {
+            if (isFlipped) {
+                flashcardEl.classList.remove('is-flipped');
+                isFlipped = false;
+                setTimeout(renderText, 300);
+            } else {
+                renderText();
+            }
+            cardCounter.textContent = `Thẻ ${currentIndex + 1} / ${flashcards.length}`;
+            document.getElementById('btn-prev').disabled = currentIndex === 0;
+            document.getElementById('btn-next').disabled = currentIndex === flashcards.length - 1;
+        }
+
+        function renderText() {
+            frontContent.textContent = flashcards[currentIndex].front;
+            backContent.textContent = flashcards[currentIndex].back;
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false}
+                ],
+                throwOnError: false
+            });
+        }
+
+        function flipCard() {
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                flashcardEl.classList.add('is-flipped');
+                totalFlips++;
+                flipCountDisplay.textContent = totalFlips;
+            } else {
+                flashcardEl.classList.remove('is-flipped');
+            }
+        }
+
+        // Sự kiện nút bấm
+        flashcardEl.addEventListener('click', flipCard);
+        document.getElementById('btn-flip').addEventListener('click', flipCard);
+        document.getElementById('btn-next').addEventListener('click', () => { if(currentIndex < flashcards.length-1) {currentIndex++; updateCardDisplay();} });
+        document.getElementById('btn-prev').addEventListener('click', () => { if(currentIndex > 0) {currentIndex--; updateCardDisplay();} });
+        
+        document.getElementById('btn-shuffle').addEventListener('click', () => {
+            flashcards.sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            updateCardDisplay();
+        });
+
+        // --- GIỮ NGUYÊN LOGIC GỬI GOOGLE SHEET ---
+        document.getElementById('btn-finish').addEventListener('click', () => {
+            clearInterval(timerInterval);
+            const timeSpent = timerDisplay.textContent;
+            const studentName = prompt("Nhập Họ và Tên của bạn để nộp kết quả:");
+            
+            if (!studentName) {
+                timerInterval = setInterval(updateTimer, 1000);
+                return;
+            }
+
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzQv_yBuMyaGpkrSrsShm1rdlk9mhcqZBkHQ5x5MZAQpcHs1t4Ixdyuw6tShU3T-rEPiQ/exec';
+            
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({
+                    action: 'save_flashcard',
+                    sheetName: 'Flashcard',
+                    name: studentName,
+                    time: timeSpent,
+                    flips: totalFlips,
+                    lesson: titleParam // Gửi thêm tên bài học để phân biệt trong Sheet
+                })
+            }).then(() => {
+                alert(`✅ ĐÃ NỘP BÀI!\nHọc sinh: ${studentName}\nBài: ${titleParam}\nThời gian: ${timeSpent}`);
+            });
+        });
+
+        // Phím tắt
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') flipCard();
+            if (e.code === 'ArrowRight') document.getElementById('btn-next').click();
+            if (e.code === 'ArrowLeft') document.getElementById('btn-prev').click();
+        });
+
+        window.onload = loadLessonData;
+    </script>
+</body>
+</html>
