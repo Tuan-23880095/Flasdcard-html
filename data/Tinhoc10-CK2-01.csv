@@ -1,0 +1,105 @@
+"Trong Python, kết quả của lệnh `>>> 10 + 13` là bao nhiêu?",23
+Câu lệnh nào dùng để in thông tin ra màn hình trong Python?,Lệnh `print()`
+"Để in xâu kí tự ""xin chao"", cú pháp đúng của lệnh `print` là gì?","`print(""xin chao"")`"
+"Kết quả của lệnh `print(""3.4 + 4.1 = "", 3.4 + 4.1)` là gì?",3.4 + 4.1 = 7.5
+"Tên biến nào sau đây là hợp lệ trong Python: `Tin hoc`, `tin@hoc`, `10tinhoc`, `_Tinhoc10`?",`_Tinhoc10`
+Quy tắc đặt tên biến trong Python cấm bắt đầu bằng ký tự nào?,Chữ số (ví dụ: `10tinhoc` là không hợp lệ).
+"Sau khi thực hiện `a, b = 2, 3` và `a, b = a + b, a - b`, giá trị của `a` là bao nhiêu?",5
+"Sau khi thực hiện `a, b = 2, 3` và `a, b = a + b, a - b`, giá trị của `b` là bao nhiêu?",-1
+Lệnh nào dùng để chuyển đổi một xâu chứa số hoặc số thực thành số nguyên?,Lệnh `int()`
+Lệnh nào dùng để chuyển đổi số nguyên hoặc xâu kí tự thành số thực?,Lệnh `float()`
+"Lệnh `int(""12.0"")` có thực hiện được không?","Không, lệnh này sẽ báo lỗi vì xâu chứa số thực không thể chuyển trực tiếp sang số nguyên."
+"Để kiểm tra kiểu dữ liệu của một biến trong Python, ta dùng lệnh gì?",Lệnh `type()`
+Cú pháp đúng của câu lệnh rẽ nhánh `if...else` trong Python là gì?,`if <điều kiện>: <khối lệnh 1> else: <khối lệnh 2>`
+"Trong cấu trúc rẽ nhánh, `<khối lệnh>` sau `if` được thực hiện khi nào?",Khi điều kiện được tính toán và cho giá trị đúng (True).
+"Cho `a=6`, `b=9`. Kết quả của `if (a > b): print(a) else: print(b)` là gì?",9
+Cú pháp đúng của câu lệnh lặp `for` với hàm `range` là gì?,"`for <biến đếm> in range(start, stop, step): <khối lệnh>`"
+Hàm `range(n)` trả lại vùng giá trị từ đâu đến đâu?,Từ $0$ đến $n-1$.
+"Trong câu lệnh `while <điều kiện>:`, `<điều kiện>` đóng vai trò là gì?",Là điều kiện lặp.
+Lệnh nào dùng để dừng và thoát ngay khỏi vòng lặp mà không cần kiểm tra điều kiện?,Lệnh `break`.
+Lệnh nào dùng để tính độ dài (số phần tử) của một danh sách trong Python?,Lệnh `len()`.
+Lệnh nào dùng để xóa một phần tử của danh sách theo chỉ số?,Lệnh `del`.
+"Cho danh sách `A = [1, 0, ""One"", 9]`. Giá trị của `A[0]` là bao nhiêu?",1
+Cách viết lệnh `del` để xóa phần tử cuối cùng của danh sách `A` là gì?,`del A[len(A) - 1]`
+Lệnh dùng để bổ sung phần tử $x$ vào cuối danh sách $A$ là gì?,`A.append(x)`
+"Lệnh `A.insert(k, x)` có ý nghĩa gì?",Chèn phần tử $x$ vào vị trí chỉ số $k$ của danh sách $A$.
+Lệnh `A.clear()` có tác dụng gì đối với danh sách $A$?,Xóa toàn bộ dữ liệu của danh sách $A$.
+"Trong Python, xâu ""Tây Nguyên"" có độ dài là bao nhiêu?",10
+Đặc điểm nào của xâu kí tự khác biệt hoàn toàn so với danh sách về khả năng thay đổi?,Không thể thay đổi từng kí tự của xâu.
+Python có kiểu dữ liệu kí tự riêng biệt không?,"Không, Python chỉ có kiểu xâu kí tự."
+"Cho xâu `s = ""abcdefg""`. Lệnh `print(s[2])` in ra kết quả gì?",Kí tự 'c'.
+Cú pháp lệnh để tìm vị trí đầu tiên của `<xâu_con>` trong `<xâu_mẹ>` là gì?,`<xâu_mẹ>.find(<xâu_con>)`
+"Lệnh `""kí_tự_nối"".join(<danh_sách>)` dùng để làm gì?",Nối danh sách các xâu thành một xâu duy nhất.
+"Lệnh `""abababaaabbab"".find(""ab"", 6)` trả về giá trị bao nhiêu?",8
+"Nếu lệnh `.find()` không tìm thấy xâu con, nó trả về giá trị nào?",-1
+Từ khóa nào được dùng để khai báo (định nghĩa) một hàm trong Python?,Từ khóa `def`.
+Hàm tự định nghĩa trong Python có thể có tối đa bao nhiêu tham số?,Không hạn chế số lượng tham số.
+Dữ liệu được truyền vào hàm khi gọi hàm được gọi là gì?,Đối số (Arguments).
+Biến được khai báo bên trong định nghĩa hàm được gọi là gì?,Tham số (Parameters).
+Một hàm có bắt buộc phải có tham số hay không?,"Không, hàm có thể có hoặc không có tham số."
+Ý kiến nào đúng về giá trị trả về của hàm?,Hàm có thể trả về giá trị hoặc không trả về giá trị.
+Công thức tính chỉ số $BMI$ là gì?,$BMI = \frac{m}{h^2}$ (với $m$ là khối lượng cơ thể và $h$ là chiều cao).
+"Trong hàm `def tinh_tong(a, b): return a + b`, `a` và `b` là gì?",Tham số.
+Phạm vi hoạt động của biến địa phương là ở đâu?,Chỉ trong chương trình con (hàm) chứa biến đó.
+Phạm vi hoạt động của biến tổng thể là ở đâu?,Trong toàn bộ chương trình (chương trình chính và các chương trình con).
+"Để một biến bên ngoài hàm có thể bị thay đổi giá trị bên trong hàm, ta cần dùng từ khóa nào?",Từ khóa `global`.
+Chương trình chính có thể sử dụng được biến được khai báo bên trong hàm không?,"Không, chương trình chính không sử dụng được biến địa phương của hàm."
+Python phân biệt lỗi chương trình thành mấy loại chính?,"3 loại (Lỗi cú pháp, lỗi ngoại lệ, lỗi ngữ nghĩa)."
+Lỗi câu lệnh viết không đúng quy định của ngôn ngữ lập trình gọi là lỗi gì?,Lỗi cú pháp (SyntaxError).
+Lỗi xảy ra khi chương trình đang chạy khiến một lệnh không thể thực hiện được gọi là lỗi gì?,Lỗi ngoại lệ (Exception).
+Lỗi mặc dù lệnh viết đúng quy định nhưng kết quả xử lý sai (sai về logic) gọi là gì?,Lỗi ngữ nghĩa hoặc lỗi logic.
+Lỗi `NameError` trong Python có nghĩa là gì?,"Lỗi xảy ra khi chương trình muốn tìm một tên (biến, hàm) nhưng không thấy."
+Loại lỗi nào được đánh giá là khó phát hiện nhất?,Lỗi ngữ nghĩa (lỗi logic).
+"Khi gặp lỗi liên quan đến giá trị của đối tượng (ví dụ nhập sai kiểu dữ liệu), Python báo lỗi gì?",Lỗi `ValueError`.
+Lỗi `IndexError` xảy ra khi nào?,Khi truy cập vào một chỉ số không tồn tại trong danh sách hoặc xâu.
+"Trong lập trình, thuật ngữ ""Bug"" dùng để chỉ điều gì?",Các lỗi không tường minh trong chương trình.
+Điểm dừng (break point) trong phần mềm soạn thảo lập trình có ý nghĩa gì?,Vị trí chương trình tạm dừng để người lập trình quan sát giá trị biến và phát hiện lỗi.
+"Nếu chương trình báo lỗi `ZeroDivisionError`, ta nên kiểm tra lại điều gì?",Kiểm tra lại giá trị của số chia (không được bằng $0$).
+Bộ dữ liệu kiểm thử (test) cần có tính chất quan trọng nào?,Cần phủ kín các trường hợp biên của dữ liệu đầu vào.
+"Để kiểm tra một số tự nhiên $n$ là chẵn hay lẻ, ta dùng phép toán nào?",Phép lấy số dư $n \% 2$.
+"Trong Python, phép toán lũy thừa được ký hiệu bằng ký tự nào?",Ký hiệu `**`.
+Lệnh `input()` luôn trả về dữ liệu thuộc kiểu gì?,Kiểu xâu kí tự (`str`).
+Từ khóa `in` khi dùng với xâu kí tự có tác dụng gì?,Kiểm tra sự xuất hiện của một xâu con trong một xâu khác.
+"Lệnh `sum(range(1, n + 1))` thực hiện công việc gì?",Tính tổng các số nguyên từ $1$ đến $n$.
+Biểu thức logic để kiểm tra một kí tự `ch` có phải là chữ số hay không là gì?,`'0' <= ch <= '9'`
+"Trong Python, lệnh lặp nào dùng khi biết trước số lần lặp?",Vòng lặp `for`.
+"Trong Python, lệnh lặp nào dùng khi chưa biết trước số lần lặp?",Vòng lặp `while`.
+"Để tính diện tích hình tròn bán kính $R$, công thức lập trình là gì?",`DT = 3.14 * R * R`
+Lỗi thiếu dấu hai chấm `:` ở cuối lệnh `if` thuộc loại lỗi gì?,Lỗi cú pháp (`SyntaxError`).
+"Trong lệnh `range(1, 10, 2)`, tham số `2` đóng vai trò gì?",Bước nhảy (step).
+"Lệnh `A + B` với $A, B$ là hai danh sách sẽ cho kết quả là gì?",Một danh sách mới nối các phần tử của $B$ vào sau các phần tử của $A$.
+"Khi định nghĩa hàm, khối lệnh của hàm phải được viết như thế nào so với dòng `def`?",Phải được lùi đầu dòng (indentation).
+Tại sao Python được gọi là ngôn ngữ lập trình bậc cao?,Vì nó có cú pháp gần gũi với ngôn ngữ tự nhiên và dễ học.
+"Tác dụng của tham số `end="" ""` trong lệnh `print()` là gì?",Thay đổi ký tự kết thúc việc in (mặc định là xuống dòng) thành một khoảng trắng.
+"Biến $x$ được gán $x = 10$ ngoài hàm, bên trong hàm `func(x)` có lệnh `x = 2`. Giá trị $x$ bên ngoài có thay đổi không?","Không, trừ khi sử dụng từ khóa `global`."
+Phương pháp kiểm soát lỗi bằng cách in ra các giá trị trung gian gọi là gì?,Công cụ in biến trung gian.
+"Trong Python, kết quả của phép toán $10 + 13$ là bao nhiêu?",23
+"Tên biến nào sau đây là hợp lệ trong Python: `Tin hoc`, `tin@hoc`, `10tinhoc`, hay `_Tinhoc10`?",`_Tinhoc10`
+"Sau khi thực hiện lệnh `a, b = 2, 3` và `a, b = a+b, a-b`, giá trị của $a$ và $b$ lần lượt là gì?",$a = 5$ và $b = -1$
+Lệnh nào được dùng để chuyển đổi một số thực hoặc một xâu chứa số nguyên thành kiểu số nguyên?,`int()`
+"Tại sao câu lệnh `int(""12.0"")` lại gây ra lỗi trong Python?",Vì hàm `int()` không thể chuyển đổi trực tiếp một xâu kí tự có định dạng số thực sang số nguyên.
+"Trong cấu trúc rẽ nhánh `if <điều kiện>:`, <khối lệnh> chỉ được thực hiện khi nào?",Khi <điều kiện> được tính toán và trả về giá trị đúng (True).
+Cú pháp đúng của câu lệnh lặp `for` kết hợp với hàm `range` là gì?,"`for <biến đếm> in range(start, stop, step): <khối lệnh>`"
+Lệnh `range(n)` trả lại vùng giá trị trong khoảng nào?,Từ $0$ đến $n-1$.
+"Trong câu lệnh `while <điều_kiện>:`, `<điều_kiện>` đóng vai trò gì?",Là điều kiện lặp.
+"Để dừng và thoát ngay lập tức khỏi vòng lặp mà không cần kiểm tra điều kiện, ta sử dụng lệnh nào?",`break`
+Lệnh nào được sử dụng để tính độ dài của một danh sách (list) trong Python?,`len()`
+"Cho danh sách `A = [1, 0, ""One"", 9, 15]`, giá trị của phần tử `A[0]` là bao nhiêu?",1
+Cách sử dụng lệnh `del` để xóa phần tử cuối cùng của danh sách $A$ là gì?,`del A[len(A)-1]`
+"Lệnh `A.insert(k, x)` có ý nghĩa gì trong xử lý danh sách?",Chèn phần tử $x$ vào vị trí chỉ số $k$ của danh sách $A$.
+"Xâu kí tự ""Tây Nguyên"" trong Python có độ dài là bao nhiêu?",10 (tính cả dấu cách và các kí tự tiếng Việt).
+Điểm khác biệt cơ bản về khả năng thay đổi dữ liệu giữa xâu kí tự và danh sách là gì?,"Xâu kí tự không thể thay đổi từng kí tự bên trong, trong khi danh sách có thể thay đổi các phần tử."
+"Lệnh `""abababaaabbab"".find(""ab"", 6)` trả về giá trị bao nhiêu?",8
+Lệnh nào dùng để nối một danh sách các xâu thành một xâu duy nhất ngăn cách bởi một kí tự nối?,"`""kí_tự_nối"".join(<danh_sách>)`"
+Từ khóa nào được sử dụng để bắt đầu khai báo một hàm trong Python?,`def`
+Dữ liệu được truyền vào khi gọi một hàm được gọi là gì?,Đối số (arguments).
+"Hàm số `def tinhBMI(m, h):` có $m$ và $h$ đóng vai trò là gì?",Tham số (parameters).
+"Cho hàm `def Vidu(a, b): return a + b**2`, kết quả của `Vidu(2, 2)` là bao nhiêu?",6
+"Cho hàm `def func(m, n): return 3*m + n`. Nếu thực hiện `print(func(1, 10))`, kết quả là gì?",13
+Phạm vi hoạt động của một biến địa phương được khai báo bên trong hàm là ở đâu?,Chỉ bên trong chương trình con (hàm) chứa biến đó.
+"Để một biến bên ngoài hàm có thể bị thay đổi giá trị bên trong hàm, ta cần dùng từ khóa nào trước tên biến đó?",`global`
+Lỗi xảy ra khi chương trình viết sai quy định của ngôn ngữ lập trình được gọi là gì?,Lỗi cú pháp (SyntaxError).
+Lỗi `NameError` trong Python thường xuất hiện khi nào?,Khi chương trình cố gắng truy cập hoặc sử dụng một tên biến hoặc tên hàm chưa được định nghĩa.
+"Khi chương trình chạy và gặp lỗi chia cho số $0$, Python sẽ báo mã lỗi ngoại lệ nào?",`ZeroDivisionError`
+"Trong lập trình, thuật ngữ ""Bug"" dùng để chỉ điều gì?",Các lỗi không tường minh bên trong chương trình.
+"Công cụ ""điểm dừng"" (break point) trong các phần mềm lập trình có tác dụng gì?",Dừng chương trình tại vị trí cụ thể để người lập trình quan sát trạng thái biến và phát hiện lỗi.
