@@ -1,0 +1,64 @@
+"Trong Toán học, một nhóm các đối tượng nhất định được gọi chung là một _____.",Tập hợp
+Các đối tượng cụ thể nằm trong một tập hợp được gọi là gì?,Phần tử
+"Theo quy ước, người ta thường đặt tên các tập hợp bằng loại chữ cái nào?",Chữ cái in hoa
+Kí hiệu $x \in A$ được phát âm hoặc hiểu như thế nào?,$x$ là một phần tử của tập hợp $A$ (hoặc $x$ thuộc $A$)
+Kí hiệu nào được dùng để chỉ ra rằng đối tượng $y$ không phải là phần tử của tập hợp $A$?,$y \notin A$
+Các phần tử của một tập hợp thường được viết ngăn cách nhau bởi dấu hiệu gì?,"Dấu chấm phẩy "";"""
+"Khi liệt kê các phần tử của tập hợp, mỗi phần tử được xuất hiện tối đa bao nhiêu lần?",Một lần duy nhất
+Tên gọi của hai cách thường dùng để mô tả một tập hợp là gì?,Liệt kê các phần tử và Chỉ ra tính chất đặc trưng
+"Viết tập hợp $C$ các chữ cái trong từ ""NHA TRANG"" bằng phương pháp liệt kê.",$C = \{N; H; A; T; R; G\}$
+"Viết tập hợp $M$ các chữ cái trong từ ""AN TOAN"" bằng phương pháp liệt kê.",$M = \{A; N; T; O\}$
+Tập hợp các số tự nhiên $0; 1; 2; 3; ...$ được kí hiệu là gì?,$\mathbb{N}$
+Sự khác biệt duy nhất giữa tập hợp $\mathbb{N}$ và tập hợp $\mathbb{N}^*$ là gì?,Tập hợp $\mathbb{N}^*$ không chứa phần tử $0$
+Mô tả tập hợp $D$ các số tự nhiên nhỏ hơn $6$ bằng cách chỉ ra tính chất đặc trưng.,$D = \{n \in \mathbb{N} \mid n < 6\}$
+Viết tập hợp $A = \{x \in \mathbb{N} \mid 12 < x < 16\}$ bằng cách liệt kê phần tử.,$A = \{13; 14; 15\}$
+Tập hợp không chứa bất kỳ phần tử nào được gọi là gì và kí hiệu như thế nào?,"Tập hợp rỗng, kí hiệu là $\emptyset$"
+Tìm số phần tử của tập hợp $A$ các số tự nhiên $x$ thỏa mãn $8 : x = 2$.,$1$ phần tử (vì $x = 4$)
+Xác định các phần tử của tập hợp $B = \{x \in \mathbb{N} \mid x + 3 < 5\}$.,$B = \{0; 1\}$
+Tập hợp $C$ các số tự nhiên $x$ thỏa mãn $x - 2 = x + 2$ là tập hợp gì?,Tập hợp rỗng ($\emptyset$)
+Xác định phần tử của tập hợp $D = \{x \in \mathbb{N} \mid x : 2 = x : 4\}$.,$D = \{0\}$
+Tập hợp $E = \{x \in \mathbb{N} \mid x + 0 = x\}$ có bao nhiêu phần tử?,Vô số phần tử
+Liệt kê các phần tử của tập hợp các số tự nhiên có hai chữ số mà chữ số hàng chục lớn hơn hàng đơn vị là $2$.,$\{20; 31; 42; 53; 64; 75; 86; 97\}$
+Viết tập hợp các số tự nhiên có ba chữ số mà tổng các chữ số bằng $3$ bằng cách liệt kê.,$\{102; 111; 120; 201; 210; 300\}$
+Cho $A = \{1; 2; 3; 4\}$ và $B = \{3; 4; 5\}$. Liệt kê các tập hợp vừa là tập hợp con của $A$ vừa là tập hợp con của $B$.,$\emptyset; \{3\}; \{4\}; \{3; 4\}$
+Cho $A = \{1; 2; 3; 4\}$. Liệt kê các tập hợp con của $A$ mà mọi phần tử đều là số chẵn.,$\{2\}; \{4\}; \{2; 4\}$
+"Nếu mọi phần tử của tập hợp $X$ đều thuộc tập hợp $Y$, ta nói $X$ là _____ của $Y$.",Tập hợp con
+Khái niệm: Giao của hai tập hợp $A$ và $B$ ($A \cap B$),"Là tập hợp gồm các phần tử vừa thuộc $A$, vừa thuộc $B$."
+"Cho $M = \{x \in \mathbb{N} \mid 5 \le x \le 9\}$ và $P = \{3; 6; 7,5; 8\}$. Phần tử nào thuộc $P$ nhưng không thuộc $M$?","$3$ và $7,5$"
+"Tại sao số $7,5$ trong tập hợp $P$ không được coi là phần tử thuộc tập hợp số tự nhiên?","Vì $7,5$ là số thập phân, không phải số nguyên không âm."
+Liệt kê các phần tử của tập hợp $H$ các số tự nhiên nhỏ hơn $7$.,$H = \{0; 1; 2; 3; 4; 5; 6\}$
+"Tập hợp các chữ cái khác nhau trong cụm từ ""TAP HOP"" là gì?",$\{T; A; P; H; O\}$
+Mô tả tập hợp $Q = \{3; 4; 5; 6\}$ dưới dạng chỉ ra tính chất đặc trưng.,$Q = \{x \in \mathbb{N} \mid 2 < x \le 6\}$ (hoặc các cách viết tương đương)
+Tập hợp các tháng của Quý 4 trong năm gồm những phần tử nào?,"Tháng Mười, Tháng Mười một, Tháng Mười hai"
+Tìm số phần tử của tập hợp các số tự nhiên có một chữ số.,$10$ phần tử ($0$ đến $9$)
+Cho $A = \{1; 2; 3; 4; 5\}$ và $B = \{3; 5; 7\}$. Tìm các phần tử thuộc cả $A$ và $B$.,$3$ và $5$
+"Sử dụng kí hiệu toán học để biểu diễn: ""Số $5$ không thuộc tập hợp $A$ các số chẵn"".",$5 \notin A$
+Viết tập hợp $B$ các số tự nhiên lẻ nhỏ hơn $9$ bằng cách liệt kê.,$B = \{1; 3; 5; 7\}$
+Tập hợp các số tự nhiên $x$ sao cho $x : 4$ và $x < 21$ là tập hợp nào?,$\{0; 4; 8; 12; 16; 20\}$
+Viết tập hợp các số tự nhiên có hai chữ số giống nhau bằng cách liệt kê.,$\{11; 22; 33; 44; 55; 66; 77; 88; 99\}$
+Cách viết nào sau đây là sai khi mô tả tập hợp $A = \{5; 7; 9\}$: $5 \in A$ hay $\{5\} \in A$?,"$\{5\} \in A$ (vì $\{5\}$ là một tập hợp, không phải là một phần tử đơn lẻ)"
+"Để biểu diễn một số tự nhiên $a$ trên tia số, người ta dùng một _____.",Điểm $a$
+"Trên tia số nằm ngang, điểm biểu diễn số nhỏ hơn nằm ở phía nào so với điểm biểu diễn số lớn hơn?",Bên trái
+Viết tập hợp $D$ gồm các số tự nhiên lẻ $x$ sao cho $x$ là số chẵn.,$D = \emptyset$
+Xác định số phần tử của tập hợp các số tự nhiên $x$ mà $x + 0 = 0$.,$1$ phần tử (chính là số $0$)
+"Trong từ ""GIÁO VIÊN"", tập hợp các chữ cái $A$ được viết là gì?",$A = \{G; I; A; O; V; E; N\}$
+"Phát biểu: ""Tập hợp các đồ dùng học tập của em"" là một tập hợp đúng hay sai?",Đúng
+Sử dụng cách nêu tính chất đặc trưng để viết tập hợp các số tự nhiên không vượt quá $6$.,$\{x \in \mathbb{N} \mid x \le 6\}$
+Điền kí hiệu thích hợp vào ô trống: $10$  $M$ với $M = \{x \in \mathbb{N} \mid 3 < x < 10\}$.,$10 \notin M$
+"Tập hợp các chữ cái tiếng Việt có mặt trong từ ""nhiên"" là tập hợp nào?",$\{n; h; i; ê\}$
+Viết tập hợp các số tự nhiên $x$ sao cho $x$ chia hết cho $5$ và $x < 21$.,$\{0; 5; 10; 15; 20\}$
+Số phần tử của tập hợp $\mathbb{N}^*$ là bao nhiêu?,Vô số phần tử
+Tập hợp các số tự nhiên $x$ thỏa mãn $x + 5 = 2$ có bao nhiêu phần tử trong phạm vi số tự nhiên?,$0$ phần tử (là tập $\emptyset$)
+"Nếu tập hợp $A = \{x; y; z\}$, hãy dùng kí hiệu để chỉ ra $y$ nằm trong $A$.",$y \in A$
+"Tập hợp các chữ cái trong từ ""MATHEMATICS"" có bao nhiêu phần tử?","$8$ phần tử (M, A, T, H, E, I, C, S)"
+Tính chất đặc trưng của tập hợp $\{1; 3; 5; 7; 9\}$ là gì?,Các số tự nhiên lẻ có một chữ số
+Viết tập hợp các số tự nhiên $x$ sao cho $x$ là bội của $3$ và $x < 10$.,$\{0; 3; 6; 9\}$
+"Trong cách viết tập hợp bằng liệt kê, thứ tự của các phần tử có bắt buộc tuân theo quy tắc nào không?","Không, thứ tự liệt kê là tùy ý."
+Cho tập hợp $S$ gồm các hành tinh trong Hệ Mặt Trời. Trái Đất có thuộc tập hợp $S$ không?,"Có, Trái Đất $\in S$."
+Xác định tập hợp $B$ các số tự nhiên lẻ lớn hơn $10$ và nhỏ hơn $11$.,$B = \emptyset$
+Cho hai tập hợp $A = \{a; b\}$ và $B = \{b; c\}$. Tìm $A \cap B$.,$\{b\}$
+"Viết tập hợp các chữ cái trong từ ""VUI HOC"" bằng cách liệt kê.",$\{V; U; I; H; O; C\}$
+Tập hợp $A = \{2; 3; 6; 7\}$ có bao nhiêu phần tử?,$4$ phần tử
+Cho $B = \{12; 23; 36; 47\}$. Số $26$ có thuộc tập hợp $B$ không?,"Không, $26 \notin B$."
+Liệt kê các phần tử của tập hợp các số tự nhiên có một chữ số lớn hơn $7$.,$\{8; 9\}$
+Cho hình elip chứa các số $4; 5; 9; 10$ được đặt tên là $A$. Các số này được gọi là gì của $A$?,Các phần tử
